@@ -22,21 +22,7 @@
  import {styles} from '../weather_styles/Styles'
  
  export function TodayComponent(props){
-
-  //These are the default states. After the first render, they will be loaded
-  //from API https://api.hgbrasil.com/weather
-  //const [latitude, setLatitude] = useState('-9.5945747')
-  //const [longitude, setLongitude] = useState('-35.6866786')
-  const [latitude, setLatitude] = useState('50.073658')
-  const [longitude, setLongitude] = useState('14.418540')
-
-  const [monthDay, setMonthDay] = useState('')
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [dayOfWeek, setDayOfWeek] = useState(i18n.t('todayText'))
-
-  //The results from API will be load into this state. The constant DEFAULT_RESULTS
-  //is used just to initialize the state in the case of the API fail to load the results
-  //regarding the required weather info
+   
   const [results, setResults] = useState(props.results)
 
   return (
