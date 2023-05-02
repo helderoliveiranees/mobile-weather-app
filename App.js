@@ -29,6 +29,8 @@ import {applyProportions, containerColor, getConditionWeatherImg,
 
 import * as Font from 'expo-font';
 
+import {styles} from './weather_styles/Styles'
+
 function App(){
 
   //These are the default states. After the first render, they will be loaded
@@ -78,7 +80,6 @@ function App(){
         //let start_date = new Date().toISOString().split('T')[0]
         let response = await fetch(Constants.WEATHER_API +`&lat=${latitude}&lon=${longitude}`);
         const json = await response.json();
-        console.log(json.results.forecast)
         if(json != null){
           setResults(json.results)
           setMonthDay(formatMonthDay(json.results.forecast[0].date))
@@ -184,8 +185,8 @@ function App(){
 
           <View style={{...styles.todayContainer, backgroundColor: containerColor(results.currently)}}>
             <View style={{... styles.rowContainer, justifyContent: 'space-between'}}>
-              <Text style={{...styles.todayText, textTransform: 'capitalize'}}>{dayOfWeek}</Text>
-              <Text style={{...styles.todayText, textTransform: 'capitalize'}} >{monthDay}</Text>
+              <Text style={{...styles.titleBoldText, textTransform: 'capitalize'}}>{dayOfWeek}</Text>
+              <Text style={{...styles.titleMediumText, textTransform: 'capitalize'}} >{monthDay}</Text>
             </View>
             <ScrollView
                 contentContainerStyle={styles.cardsContainer}
@@ -224,7 +225,7 @@ function App(){
           </View>
           <View style={{...styles.forecastContainer, backgroundColor: containerColor(results.currently)}}>
             <View style={{...styles.rowContainer, justifyContent: 'space-between', alignItems: 'center'}}>
-              <Text style={styles.todayText}>{i18n.t('nextForecastText')}</Text>
+              <Text style={styles.titleBoldText}>{i18n.t('nextForecastText')}</Text>
               <Image
                     style={styles.smallIconContainer}
                     source={Constants.ICONS.CALENDAR_URI}
@@ -269,161 +270,5 @@ function App(){
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  linearGradient: {
-    width: '100%',
-    alignItems: 'center'
-  },
-  firstContainer:applyProportions({
-    width: 343,
-    flexDirection: 'row',
-    marginTop: 44,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  }),
-  pinContainer:applyProportions({
-    width: 20.25,
-    height: 24.44,
-  }),
-  cityNameText:{
-    fontFamily: 'SFProDisplay-Semibold',
-    fontSize: 18,
-    color: '#FFFFFF',
-  },
-  chevronContainer:applyProportions({
-    width: 9.55,
-    height: 6.36,
-  }),
-  bellContainer:applyProportions({
-    width: 29,
-    height: 27,
-  }),
-  selectedCityContainer:applyProportions({
-    gap: 12,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }),
-  selectedCityText:{
-    fontSize: 18,
-    fontFamily: 'SFProDisplay-Medium',
-    //fontWeight: '400',
-    color: '#ffffff',
-    textAlign: 'left',
-  },
-  figureAlignment:{
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  figureContainerBig:applyProportions({
-    width:284,
-    height: 187,
-    resizeMode: 'contain',
-  }),
-  figureContainerSmall:applyProportions({
-    width: 44,
-    height: 44,
-    resizeMode: 'contain',
-  }),
-  curWeatherContainer:{
-    width: '100%',
-    alignItems: 'center',
-  },
-  tempText:{
-    fontFamily: 'SFProDisplay-Semibold',
-    //fontWeight: '600',
-    fontSize: 64,
-    lineHeight: 75,
-    color: '#FFFFFF'
-  },
-  rowContainer:{
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap:12,
-  },
-  descriptionText:{
-    fontFamily: 'SFProDisplay-Medium',
-    //fontWeight: '400',
-    fontSize: 18,
-    textAlign: 'center',
-    color: '#FFFFFF'
-  },
-  aditionalInfoContainer:applyProportions({
-    width: 343,
-    marginTop:30,
-    borderRadius: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    paddingVertical: 14,
-  }),
-  aditionalInfoText:{
-    fontFamily: 'SFProDisplay-Bold',
-    //fontWeight: '700',
-    fontSize: 14,
-    color: '#FFFFFF'
-  },
-  smallIconContainer:applyProportions({
-    width: 24,
-    height: 24,
-  }),
-  todayContainer:applyProportions({
-    width: 343,
-    marginTop:20,
-    borderRadius: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-  }),
-  todayText:{
-    fontFamily: 'SFProDisplay-Bold',
-    fontSize: 18,
-    color: '#FFFFFF'
-  },
-  cardsContainer:applyProportions({
-    flexDirection: 'row',
-    marginTop: 12,
-    alignItems:'center',
-    gap:4,
-  }),
-  singleCardContainer:applyProportions({
-    width:70,
-    //height: 155,
-    justifyContent: 'space-around',
-    alignItems:'center',
-    paddingVertical:13,
-    gap: 20,
-  }),
-  singleCardContainerWB:applyProportions({
-    width:70,
-    //height: 155,
-    justifyContent: 'space-around',
-    alignItems:'center',
-    paddingVertical:13,
-    gap:20,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.10)',
-    borderColor: 'rgba(255, 255, 255, 0.85)',
-    borderWidth: 1,
-  }),
-  forecastContainer:applyProportions({
-    width: 343,
-    marginTop:20,
-    borderRadius: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-  }),
-  forecastItensContainer:applyProportions({
-    marginTop:20,
-    flexDirection: 'column',
-    gap: 28,
-  }),
-  forecastItem:{
-    flex:1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default App;
