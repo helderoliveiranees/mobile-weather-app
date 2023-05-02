@@ -4,6 +4,10 @@
  * Candidate: HELDER FERNANDO DE ARAUJO OLIVEIRA
  */
 
+/**
+ * This component displays the weather forecast information for the upcoming days
+ */
+
  import React from 'react';
  //import type {PropsWithChildren} from 'react';
  import {

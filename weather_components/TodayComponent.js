@@ -4,6 +4,11 @@
  * Candidate: HELDER FERNANDO DE ARAUJO OLIVEIRA
  */
 
+/**
+* This component displays the current day's weather forecast information,
+* including temperature, humidity, wind speed, and chance of rain.
+*/
+
  import React from 'react';
  import {
    SafeAreaView,

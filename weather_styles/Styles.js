@@ -1,3 +1,16 @@
+/**
+ * Application for NEES selection
+ * Weather Application
+ * Candidate: HELDER FERNANDO DE ARAUJO OLIVEIRA
+ */
+
+/**
+ * Styles used into the eather appliction. The applyProportions function
+ * is applied in order to achieve Colors, size, and spacing of graphic 
+ * elements consistent with those presented in Figma. The application 
+ * applies resizing of elements to better adapt to different smartphone screens.
+ */
+
 import {StyleSheet} from 'react-native';
 import {applyProportions} from '../weather_utils/utils';
 

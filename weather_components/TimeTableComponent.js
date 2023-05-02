@@ -4,6 +4,16 @@
  * Candidate: HELDER FERNANDO DE ARAUJO OLIVEIRA
  */
 
+/**
+ * This component imitates the hourly weather forecast presented in the Figma model. 
+ * Since a subscription to the API is required to use this feature, the component 
+ * only displays a list with information about the forecast for the upcoming days.
+ * For each of the days, a time is associated, calculated from the current time. 
+ * For each day, one hour is added to the current time.
+ * If the paid version of the API was used, the API call would look something like this: 
+ * https://api.hgbrasil.com/weather/historical?key=API_KEY&woeid=455903&start_date=TODAY&mode=all
+ */
+
  import React from 'react';
  //import type {PropsWithChildren} from 'react';
  import {
@@ -33,12 +43,10 @@
    useEffect(() => {
     (async () =>{
       try{
-        console.log('Printed')
         let dayOfWeek = getDayOfWeek(props.results.forecast[selectedIndex].date, Constants.LONG)
         let monthDayDate = formatMonthDay(props.results.forecast[selectedIndex].date)
         setDayOfWeek((selectedIndex == 0)? i18n.t('todayText'):dayOfWeek)
         setMonthDay(monthDayDate)
-        //setSelectedIndex(index)
       }catch(e){
         console.log(e)
         //Show some error message
