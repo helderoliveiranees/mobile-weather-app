@@ -121,6 +121,7 @@ export const styles = StyleSheet.create({
       marginTop: 12,
       alignItems:'center',
       gap:4,
+      paddingBottom: 12,
     }),
     singleCardContainer:applyProportions({
       width:70,
