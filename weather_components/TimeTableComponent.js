@@ -15,7 +15,7 @@
    Pressable,
  } from 'react-native';
  
- import {useState} from 'react';
+ import {useState, useEffect} from 'react';
  
  import * as Constants from '../weather_constants/Constants';
  import i18n from '../weather_translation/i18n';
@@ -29,20 +29,36 @@
    const [monthDay, setMonthDay] = useState('')
    const [selectedIndex, setSelectedIndex] = useState(0)
    const [dayOfWeek, setDayOfWeek] = useState(i18n.t('todayText'))
+
+   useEffect(() => {
+    (async () =>{
+      try{
+        console.log('Printed')
+        let dayOfWeek = getDayOfWeek(props.results.forecast[selectedIndex].date, Constants.LONG)
+        let monthDayDate = formatMonthDay(props.results.forecast[selectedIndex].date)
+        setDayOfWeek((selectedIndex == 0)? i18n.t('todayText'):dayOfWeek)
+        setMonthDay(monthDayDate)
+        //setSelectedIndex(index)
+      }catch(e){
+        console.log(e)
+        //Show some error message
+      }
+    })()
+  }, [props.results, selectedIndex])
  
-   //Update the month day format hen the user click the respective day
-   function updateDate(index){
-     try{
-       let dayOfWeek = getDayOfWeek(props.results.forecast[index].date, Constants.LONG)
-       let monthDayDate = formatMonthDay(props.results.forecast[index].date)
-       setDayOfWeek((index == 0)? i18n.t('todayText'):dayOfWeek)
-       setMonthDay(monthDayDate)
-       setSelectedIndex(index)
-     }catch(e){
-       console.log(e)
-       //Show some error message
-     }
-   }
+  //  //Update the month day format hen the user click the respective day
+  //  function updateDate(index){
+  //    try{
+  //      let dayOfWeek = getDayOfWeek(props.results.forecast[index].date, Constants.LONG)
+  //      let monthDayDate = formatMonthDay(props.results.forecast[index].date)
+  //      setDayOfWeek((index == 0)? i18n.t('todayText'):dayOfWeek)
+  //      setMonthDay(monthDayDate)
+  //      setSelectedIndex(index)
+  //    }catch(e){
+  //      console.log(e)
+  //      //Show some error message
+  //    }
+  //  }
  
    return (
      <SafeAreaView>
@@ -59,7 +75,7 @@
                  {props.results.forecast.map((item, index) => {
                      return (
                          <Pressable key={index}
-                         onPress={() => updateDate(index)}
+                         onPress={() => setSelectedIndex(index)}
                          >
                          <View key={index}
                              style={(index == selectedIndex)?styles.singleCardContainerWB:
