@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
       width: '100%',
       alignItems: 'center'
     },
-    firstContainer:applyProportions({
+    todayContainer:applyProportions({
       width: 343,
       flexDirection: 'row',
       marginTop: 44,
@@ -59,7 +59,6 @@ export const styles = StyleSheet.create({
       resizeMode: 'contain',
     }),
     curWeatherContainer:{
-      width: '100%',
       alignItems: 'center',
     },
     tempText:{
@@ -100,7 +99,7 @@ export const styles = StyleSheet.create({
       width: 24,
       height: 24,
     }),
-    todayContainer:applyProportions({
+    timeTableContainer:applyProportions({
       width: 343,
       marginTop:20,
       borderRadius: 20,
