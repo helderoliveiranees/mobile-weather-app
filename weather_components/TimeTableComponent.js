@@ -19,7 +19,7 @@
  
  import * as Constants from '../weather_constants/Constants';
  import i18n from '../weather_translation/i18n';
- import {applyProportions, containerColor, getConditionWeatherImg, 
+ import {containerColor, getConditionWeatherImg, 
    getDayOfWeek, formatMonthDay, getFakeTime} from '../weather_utils/utils';
  
  import {styles} from '../weather_styles/Styles'
@@ -30,14 +30,11 @@
    const [selectedIndex, setSelectedIndex] = useState(0)
    const [dayOfWeek, setDayOfWeek] = useState(i18n.t('todayText'))
  
-   //The results from API will be load into this state
-   const [results, setResults] = useState(props.results)
- 
    //Update the month day format hen the user click the respective day
    function updateDate(index){
      try{
-       let dayOfWeek = getDayOfWeek(results.forecast[index].date, Constants.LONG)
-       let monthDayDate = formatMonthDay(results.forecast[index].date)
+       let dayOfWeek = getDayOfWeek(props.results.forecast[index].date, Constants.LONG)
+       let monthDayDate = formatMonthDay(props.results.forecast[index].date)
        setDayOfWeek((index == 0)? i18n.t('todayText'):dayOfWeek)
        setMonthDay(monthDayDate)
        setSelectedIndex(index)
@@ -49,7 +46,7 @@
  
    return (
      <SafeAreaView>
-         <View style={{...styles.timeTableContainer, backgroundColor: containerColor(results.currently)}}>
+         <View style={{...styles.timeTableContainer, backgroundColor: containerColor(props.results.currently)}}>
              <View style={{... styles.rowContainer, justifyContent: 'space-between'}}>
                  <Text style={{...styles.titleBoldText, textTransform: 'capitalize'}}>{dayOfWeek}</Text>
                  <Text style={{...styles.titleMediumText, textTransform: 'capitalize'}} >{monthDay}</Text>
@@ -59,7 +56,7 @@
                  horizontal={true}
                  showsHorizontalScrollIndicator={false}
              >
-                 {results.forecast.map((item, index) => {
+                 {props.results.forecast.map((item, index) => {
                      return (
                          <Pressable key={index}
                          onPress={() => updateDate(index)}

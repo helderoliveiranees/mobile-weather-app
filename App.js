@@ -33,6 +33,7 @@ import {styles} from './weather_styles/Styles'
 
 import {TodayComponent} from './weather_components/TodayComponent'
 import {TimeTableComponent} from './weather_components/TimeTableComponent'
+import { ForecastComponent } from './weather_components/ForecastComponent';
 
 function App(){
 
@@ -52,20 +53,23 @@ function App(){
   //regarding the required weather info
   const [results, setResults] = useState(Constants.DEFAULT_RESULTS)
 
-  //Load the fonts used in the UI
+  const [fontsLoaded, setFontsLoaded] = useState(false)
+
+  //Loads the fonts used in the UI
   useEffect(() => {
     (async () =>{
       try{
+        console.log("Tag 1")
         await Font.loadAsync({
           'AlegreyaSans-Regular': require('./assets/fonts/AlegreyaSans-Regular.ttf'),
           'AlegreyaSans-Bold': require('./assets/fonts/AlegreyaSans-Bold.ttf'),
-          'SFProDisplay-Regular': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
-          'SFProDisplay-Bold': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
-          'SFProDisplay-Semibold': require('./assets/fonts/SF-Pro-Display-Semibold.otf'),
-          'SFProDisplay-Medium': require('./assets/fonts/SF-Pro-Display-Medium.otf'),
-          'SFProDisplay-Thin': require('./assets/fonts/SF-Pro-Display-Thin.otf'),
+          'SFProDisplay-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
+          'SFProDisplay-Medium': require('./assets/fonts/Roboto-Medium.ttf'),
         });
+        setFontsLoaded(true)
+        console.log("Tag 2")
       }catch(e){
+        console.log(e)
         //Show some error message
       }
     })()
@@ -80,10 +84,13 @@ function App(){
   useEffect(() => {
     (async () =>{
       try{
-        //let start_date = new Date().toISOString().split('T')[0]
+        if(!fontsLoaded){
+           return
+        }
+        console.log('fonts were loaded')
         let response = await fetch(Constants.WEATHER_API +`&lat=${latitude}&lon=${longitude}`);
         const json = await response.json();
-        console.log(json.results)
+        //console.log(json.results)
         if(json != null){
           setResults(json.results)
           setMonthDay(formatMonthDay(json.results.forecast[0].date))
@@ -95,7 +102,7 @@ function App(){
         //Show some error message
       }
     })()
-  }, [])
+  }, [fontsLoaded])
 
   //Update the month day format hen the user click the respective day
   function updateDate(index){
@@ -127,48 +134,7 @@ function App(){
         >
           <TodayComponent results={results}/>
           <TimeTableComponent results={results}/>
-          <View style={{...styles.forecastContainer, backgroundColor: containerColor(results.currently)}}>
-            <View style={{...styles.rowContainer, justifyContent: 'space-between', alignItems: 'center'}}>
-              <Text style={styles.titleBoldText}>{i18n.t('nextForecastText')}</Text>
-              <Image
-                    style={styles.smallIconContainer}
-                    source={Constants.ICONS.CALENDAR_URI}
-              />
-            </View>
-            <View style={styles.forecastItensContainer}>
-                {results.forecast.map((item, index) => {
-                    return (
-                      <View key={index}
-                        style={{...styles.rowContainer, justifyContent: 'space-between'}}
-                      >
-                        <View style={{...styles.forecastItem, alignItems: 'flex-start'}}>
-                          <Text style={{...styles.descriptionText, fontFamily: 'AlegreyaSans-Bold', 
-                            textTransform: 'capitalize'}}>
-                              {getDayOfWeek(results.forecast[index].date, Constants.SHORT)}.
-                          </Text>
-                        </View>
-                        <View style={{...styles.forecastItem, alignItems: 'flex-start'}}>
-                          <Image
-                            style={styles.figureContainerSmall}
-                            source={
-                              //The figure to represent the current weather condition will be
-                              //defined based the condition slug, since it have 12 possibilities.
-                              //The condition code could be used instead, however, due the time
-                              //limitation to accomplish this activity, it was not the option
-                              //(it has 48 possibilities)
-                              getConditionWeatherImg(item.condition)
-                            }
-                          />
-                        </View>
-                        <View style={[styles.rowContainer, styles.forecastItem]}>
-                          <Text style={{...styles.descriptionText, fontFamily: 'AlegreyaSans-Bold'}}>{item.max}°C</Text>
-                          <Text style={{...styles.descriptionText, fontFamily: 'AlegreyaSans-Bold', color: Constants.WHITE_50}}>{item.min}°C</Text>
-                        </View>
-                      </View>
-                    );
-                })}
-            </View>
-          </View>
+          <ForecastComponent results={results}/>
         </LinearGradient>
       </ScrollView>
     </SafeAreaView>
