@@ -14,8 +14,6 @@
  
  import {useState} from 'react';
  
- import * as Localization from 'expo-localization';
- import LinearGradient from 'react-native-linear-gradient';
  import * as Constants from '../weather_constants/Constants';
  import i18n from '../weather_translation/i18n';
  import {containerColor, getConditionWeatherImg} from '../weather_utils/utils';
