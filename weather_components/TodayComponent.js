@@ -28,36 +28,6 @@
 
   return (
     <SafeAreaView>
-      <View style={styles.todayContainer}>
-        <View style={styles.selectedCityContainer}>
-          <Image
-            style={styles.pinContainer}
-            source={Constants.ICONS.PIN_URI}
-          />
-          <Text numberOfLines={1} style={styles.cityNameText}>{props.results.city}</Text>
-          <Image
-            style={styles.chevronContainer}
-            source={Constants.ICONS.CHEVRON_URI}
-          />
-        </View>
-        <Image
-          style={styles.bellContainer}
-          source={Constants.ICONS.BELL_URI}
-        />
-      </View>
-      <View style={styles.figureAlignment}>
-        <Image
-          style={styles.figureContainerBig}
-          source={
-            //The figure to represent the current weather condition will be
-            //defined based the condition slug, since it have 12 possibilities.
-            //The condition code could be used instead, however, due the time
-            //limitation to accomplish this activity, it was not the option
-            //(it has 48 possibilities)
-            getConditionWeatherImg(props.results.condition_slug)
-          }
-        />
-      </View>
       <View style={styles.curWeatherContainer}>
         <Text style={styles.tempText}>{props.results.temp}°C</Text>
         <Text style={styles.descriptionText}>{props.results.description}</Text>

@@ -152,7 +152,6 @@ export function getFakeTime (factor){
   try{
       let today = new Date()
       today.setHours(today.getHours() + factor);
-      console.log(today)
       const time_now = today.toLocaleString(Localization.locale, {hour:'numeric'})
       return time_now +':00'
   }catch (e){
