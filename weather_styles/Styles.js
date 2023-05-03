@@ -20,6 +20,12 @@ export const styles = StyleSheet.create({
       width: '100%',
       alignItems: 'center'
     },
+    linearGradientLoading: {
+      width: '100%',
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     todayContainer:applyProportions({
       width: 343,
       flexDirection: 'row',
@@ -178,7 +184,7 @@ export const styles = StyleSheet.create({
       flex: 1,
     },
     imageContainer: {
-      height: Dimensions.get('window').height / 2,
+      height: '40%',
       justifyContent: 'center',
       alignItems: 'center',
       marginBottom: 20,

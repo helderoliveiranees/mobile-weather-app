@@ -17,7 +17,7 @@
    ScrollView,
    StatusBar,
    Text,
-   View,
+   Image,
  } from 'react-native';
  
  import {useEffect, useState} from 'react';
@@ -32,15 +32,20 @@
  import {TimeTableComponent} from '../weather_components/TimeTableComponent'
  import { ForecastComponent } from '../weather_components/ForecastComponent';
  import {LocationComponent} from '../weather_components/LocationComponent'
+
+ import i18n from '../weather_translation/i18n';
  
  export default function MainScreen({navigation,route}){
  
    //These are the default latitude and longitude from the Maceio-AL city 
    const [latitude, setLatitude] = useState(Constants.LATITUDE_MACEIO)
    const [longitude, setLongitude] = useState(Constants.LONGITUDE_MACEIO)
+
+   const [newLocationLoaded, setNewLocationLoaded] = useState(false)
  
  
    //The results from API will be load into this state
+   //const [results, setResults] = useState(Constants.DEFAULT_RESULTS)
    const [results, setResults] = useState(null)
  
    //Calls the https://api.hgbrasil.com/ to retrieve the weather information
@@ -52,9 +57,6 @@
    useEffect(() => {
      (async () =>{
        try{
-         if(!locationLoaded){
-            return
-         }
          let response = await fetch(Constants.WEATHER_API +`&lat=${latitude}&lon=${longitude}`);
          const json = await response.json();
          if(json != null){
@@ -67,7 +69,7 @@
          //Show some error message
        }
      })()
-  }, [locationLoaded])
+  }, [newLocationLoaded])
  
    return (
     <SafeAreaView>
@@ -76,33 +78,37 @@
         translucent
         backgroundColor="transparent"
       />
-      <ScrollView>
-        {/* If it is daytime, the component will display the light theme 
-        instead of the dark theme used during the night. */}
-        <LinearGradient colors={
-          (results.currently=='dia'|| results.currently=='day')?
-          Constants.LIGHT_THEME:Constants.DARK_THEME}
-          style={styles.linearGradient}
-        >
-          {(results != null)?
-            <View>
+        {(results != null)?
+          <ScrollView>
+            {/* If it is daytime, the component will display the light theme 
+            instead of the dark theme used during the night. */}
+            <LinearGradient colors={
+              (results.currently=='dia'|| results.currently=='day')?
+              Constants.LIGHT_THEME:Constants.DARK_THEME}
+              style={styles.linearGradient}
+            >
               <LocationComponent results={results}/>
               <TodayComponent results={results}/>
               <TimeTableComponent results={results}/>
               <ForecastComponent results={results}/>
-            </View>
-          :
-            <View style={styles.imageContainer}>
-              <Image
-                source={Constants.GIF_LOADING}
-                style={styles.gif}
-                animated
-              />
-              <Text style={{...styles.descriptionText, fontFamily: 'AlegreyaSans-Bold'}}>{i18n.t('loadingText')}</Text>
-            </View>
-          }
-        </LinearGradient>
-      </ScrollView>
+            </LinearGradient>
+          </ScrollView>
+        :
+          <LinearGradient colors={Constants.SPLASH_THEME}
+            style={styles.linearGradientLoading}
+          >
+            <Image
+              source={Constants.GIF_LOADING_URI}
+              style={styles.gif}
+            />
+            <Text style={{...styles.descriptionText, 
+              fontFamily: 'AlegreyaSans-Bold'}}>
+                {i18n.t('loadingText')}
+            </Text>
+          </LinearGradient>
+        }
+        
+
     </SafeAreaView>
    );
  }

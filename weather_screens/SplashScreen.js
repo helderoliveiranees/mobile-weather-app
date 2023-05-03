@@ -9,10 +9,11 @@
  */
 
  import React, { useEffect, useState, useRef } from 'react';
- import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+ import {SafeAreaView, Text, View, StatusBar, Image} from 'react-native';
  import LinearGradient from 'react-native-linear-gradient';
  import * as Font from 'expo-font';
  import * as Constants from '../weather_constants/Constants';
+ import {styles} from '../weather_styles/Styles'
  
  export default function SplashScreen({ navigation, route }) {
 
@@ -50,39 +51,33 @@
   //Triggers to the MainScreen when the fonts are loaded and gif
   //animation time finish
   useEffect(() => {
-    if(fontsLoaded && triggerNextScreen){
+    if(fontsLoaded){
       console.log('print navigate')
       navigation.navigate('MainScreen')
     }
-  }, [fontsLoaded, triggerNextScreen])
-  
+  }, [fontsLoaded])
 
-  const trigger = () =>{
-    setTriggerNextScreen(true)
-  }
-
-  //Play the next gif at least 3 seconds. It will be played
-  //until the trigger to next screen become true and fonts be loaded
-   useEffect(() => {
-    setTimeout(trigger(), 5000);
-   }, []);
- 
-
-   return (
-     <LinearGradient colors={Constants.SPLASH_THEME}
-       style={styles.gradient}
-     >
-       <View style={styles.imageContainer}>
-         <Image
-           source={Constants.GIF_SPLASH_URI}
-           style={styles.gif}
-           animated
-         />
-       </View>
-       <View style={styles.textSplashContainer}>
-         <Text style={styles.textSplash}>Weather App - NEES</Text>
-       </View>
-     </LinearGradient>
-   );
- };
+  return (
+    <SafeAreaView>
+    <StatusBar
+      hidden={false}
+      translucent
+      backgroundColor="transparent"
+    />
+      <LinearGradient colors={Constants.SPLASH_THEME}
+        style={styles.linearGradientLoading}
+      >
+        <View style={styles.imageContainer}>
+          <Image
+            source={Constants.GIF_SPLASH_URI}
+            style={styles.gif}
+          />
+        </View>
+        <View style={styles.textSplashContainer}>
+          <Text style={styles.textSplash}>Weather App - NEES</Text>
+        </View>
+      </LinearGradient>
+    </SafeAreaView>
+  );
+};
  

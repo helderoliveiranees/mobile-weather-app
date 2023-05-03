@@ -57,18 +57,7 @@ export const ICONS = {
 }
 
 //Uri to the gif presented in the splash screen
-export const GIF_SPLASH_URI = require('../weather_figures/gifs/day-night-animation.gif')
+export const GIF_SPLASH_URI = require('../weather_figures/gifs/animation.gif')
 
 //Uri to the gif presented in the splash screen
-export const GIF_LOADING_URI = require('../weather_figures/gifs/day-night-animation.gif')
-
-//Constants used on Splash Screen
-// export const VIDEOS = [
-//     { uri: '../weather_videos/1-earth.mp4', id: 1 },
-//     { uri: '../weather_videos/1-sunny.mp4', id: 2 },
-//     { uri: '../weather_videos/2-cloudy-day.mp4', id: 3 },
-//     { uri: '../weather_videos/3-cloudy-thunder.mp4', id: 4 },
-//     { uri: '../weather_videos/4-cloudy-rain.mp4', id: 5 },
-//     { uri: '../weather_videos/5-cold.mp4', id: 6 },
-//     { uri: '../weather_videos/6-windy.mp4', id: 7 },
-// ];
+export const GIF_LOADING_URI = require('../weather_figures/gifs/animation.gif')
