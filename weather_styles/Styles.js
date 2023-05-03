@@ -13,6 +13,7 @@
 
 import {StyleSheet} from 'react-native';
 import {applyProportions} from '../weather_utils/utils';
+import * as Constants from '../weather_constants/Constants';
 
 export const styles = StyleSheet.create({
     linearGradient: {
@@ -173,17 +174,27 @@ export const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
-    splashContainer: {
+    gradient: {
       flex: 1,
-      backgroundColor: '#FFFFFF',
+    },
+    imageContainer: {
+      height: Dimensions.get('window').height / 2,
       justifyContent: 'center',
       alignItems: 'center',
+      marginBottom: 20,
     },
-    splashVideo: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: width,
-      height: height,
+    gif: {
+      width: 200,
+      height: 200,
+      backgroundColor: 'transparent',
     },
+    textSplashContainer:{
+      justifyContent: 'center',
+      alignItems: 'center'
+   },
+    textSplash:{
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: '#FFFFFF'
+   }
 });  

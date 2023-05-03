@@ -16,6 +16,8 @@
    SafeAreaView,
    ScrollView,
    StatusBar,
+   Text,
+   View,
  } from 'react-native';
  
  import {useEffect, useState} from 'react';
@@ -23,8 +25,6 @@
  import * as Localization from 'expo-localization';
  import LinearGradient from 'react-native-linear-gradient';
  import * as Constants from '../weather_constants/Constants';
- 
- import * as Font from 'expo-font';
  
  import {styles} from '../weather_styles/Styles'
  
@@ -35,58 +35,24 @@
  
  export default function MainScreen({navigation,route}){
  
-   //These are the default states. After the first render, they will be loaded
-   //from API https://api.hgbrasil.com/weather
-   //const [latitude, setLatitude] = useState('-9.5945747')
-   //const [longitude, setLongitude] = useState('-35.6866786')
-   const [latitude, setLatitude] = useState('50.073658')
-   const [longitude, setLongitude] = useState('14.418540')
+   //These are the default latitude and longitude from the Maceio-AL city 
+   const [latitude, setLatitude] = useState(Constants.LATITUDE_MACEIO)
+   const [longitude, setLongitude] = useState(Constants.LONGITUDE_MACEIO)
  
  
-   //The results from API will be load into this state. The constant DEFAULT_RESULTS
-   //is used just to initialize the state in the case of the API fail to load the results
-   //regarding the required weather info
-   const [results, setResults] = useState(Constants.DEFAULT_RESULTS)
- 
-   //Used to check if the fonts ere loaded
-   const [fontsLoaded, setFontsLoaded] = useState(false)
- 
-   //Loads the fonts used in the UI
-   useEffect(() => {
-     (async () =>{
-       try{
-         console.log("Tag 1")
-         await Font.loadAsync({
-           'AlegreyaSans-Regular': require('../assets/fonts/AlegreyaSans-Regular.ttf'),
-           'AlegreyaSans-Bold': require('../assets/fonts/AlegreyaSans-Bold.ttf'),
-           'SFProDisplay-Bold': require('../assets/fonts/Roboto-Bold.ttf'),
-           'SFProDisplay-Medium': require('../assets/fonts/Roboto-Medium.ttf'),
-         });
-         setFontsLoaded(true)
-         console.log("Tag 2")
-       }catch(e){
-         // This is set to true because I want to make sure that the weather API is called
-         // even if the fonts are not correctly loaded on some devices. By forcing the API call
-         // to occur regardless of the font loading status, the user will always have access
-         // to the latest weather information.
-         setFontsLoaded(true)
-         console.log(e)
-         //Show some error message
-       }
-     })()
-   }, [])
- 
+   //The results from API will be load into this state
+   const [results, setResults] = useState(null)
  
    //Calls the https://api.hgbrasil.com/ to retrieve the weather information
-   //This function is called on the first render, as well as when the fonts 
-   //are loaded and when the user selects another city.
-   //Note that the temperature historical data is not implemented in this version 
+   //This function is called on the first render, as well as when the the user 
+   //selects another city.
+   //Note that the temperature historical data is NOT implemented in this version 
    //since it requires a subscription to the HGBrasil API.
-   //Therefore, mock data is used to simulate this functionality.
+   //Therefore, mock data is used to mimic this functionality.
    useEffect(() => {
      (async () =>{
        try{
-         if(!fontsLoaded){
+         if(!locationLoaded){
             return
          }
          let response = await fetch(Constants.WEATHER_API +`&lat=${latitude}&lon=${longitude}`);
@@ -101,7 +67,7 @@
          //Show some error message
        }
      })()
-  }, [fontsLoaded])
+  }, [locationLoaded])
  
    return (
     <SafeAreaView>
@@ -118,10 +84,23 @@
           Constants.LIGHT_THEME:Constants.DARK_THEME}
           style={styles.linearGradient}
         >
-          <LocationComponent results={results}/>
-          <TodayComponent results={results}/>
-          <TimeTableComponent results={results}/>
-          <ForecastComponent results={results}/>
+          {(results != null)?
+            <View>
+              <LocationComponent results={results}/>
+              <TodayComponent results={results}/>
+              <TimeTableComponent results={results}/>
+              <ForecastComponent results={results}/>
+            </View>
+          :
+            <View style={styles.imageContainer}>
+              <Image
+                source={Constants.GIF_LOADING}
+                style={styles.gif}
+                animated
+              />
+              <Text style={{...styles.descriptionText, fontFamily: 'AlegreyaSans-Bold'}}>{i18n.t('loadingText')}</Text>
+            </View>
+          }
         </LinearGradient>
       </ScrollView>
     </SafeAreaView>

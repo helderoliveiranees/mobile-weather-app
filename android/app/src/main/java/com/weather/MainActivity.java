@@ -13,8 +13,8 @@ import com.facebook.react.defaults.DefaultReactActivityDelegate;
 public class MainActivity extends ReactActivity {
 
   /**
-  * Added by Helder Oliveira
-  */
+   * Added by Helder Oliveira
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);

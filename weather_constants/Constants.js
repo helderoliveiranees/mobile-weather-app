@@ -1,5 +1,8 @@
+import { Dimensions } from 'react-native';
+
 export const DARK_THEME = ['#08244F', '#134CB5', '#0B42AB']
 export const LIGHT_THEME = ['#29B2DD', '#33AADD', '#2DC8EA']
+export const SPLASH_THEME = ['#29B2DD', '#5B97FE', '#0B42AB']
 
 export const DARK_CONTAINER = 'rgba(0, 16, 38, 0.25)'
 export const LIGHT_CONTAINER = 'rgba(16, 64, 132, 0.25)'
@@ -12,6 +15,11 @@ export const HUNDRED_PERCENT = 1
 
 export const LONG = 'long'
 export const SHORT = 'short'
+
+export const LATITUDE_MACEIO = -9.5945747
+export const LONGITUDE_MACEIO = -35.6866786
+
+export const { width, height } = Dimensions.get('window');
 
 //Never expose your API key like this on GitHub.
 //Always hide your keys on server side. This key 
@@ -47,3 +55,20 @@ export const ICONS = {
     WIND_SPEEDY_URI: require('../weather_figures/icons/wind_speedy.png'),
     CALENDAR_URI: require('../weather_figures/icons/calendar.png'),
 }
+
+//Uri to the gif presented in the splash screen
+export const GIF_SPLASH_URI = require('../weather_figures/gifs/day-night-animation.gif')
+
+//Uri to the gif presented in the splash screen
+export const GIF_LOADING_URI = require('../weather_figures/gifs/day-night-animation.gif')
+
+//Constants used on Splash Screen
+// export const VIDEOS = [
+//     { uri: '../weather_videos/1-earth.mp4', id: 1 },
+//     { uri: '../weather_videos/1-sunny.mp4', id: 2 },
+//     { uri: '../weather_videos/2-cloudy-day.mp4', id: 3 },
+//     { uri: '../weather_videos/3-cloudy-thunder.mp4', id: 4 },
+//     { uri: '../weather_videos/4-cloudy-rain.mp4', id: 5 },
+//     { uri: '../weather_videos/5-cold.mp4', id: 6 },
+//     { uri: '../weather_videos/6-windy.mp4', id: 7 },
+// ];
