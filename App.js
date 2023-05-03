@@ -19,7 +19,7 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainScreen from './weather_screens/MainScreen'
-import SplashScreen from './weather_screens/SpashScreen'
+import SplashScreen from './weather_screens/SplashScreen'
 
 const Stack = createNativeStackNavigator();
 
