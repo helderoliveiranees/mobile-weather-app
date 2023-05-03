@@ -173,4 +173,17 @@ export const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    splashContainer: {
+      flex: 1,
+      backgroundColor: '#FFFFFF',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    splashVideo: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: width,
+      height: height,
+    },
 });  
