@@ -15,6 +15,7 @@ import {
   Text,
   View,
   Image,
+  Pressable,
 } from 'react-native';
 
 import {useState} from 'react';
@@ -29,7 +30,9 @@ export function LocationComponent(props){
  return (
    <SafeAreaView>
      <View style={styles.todayContainer}>
-       <View style={styles.selectedCityContainer}>
+       <Pressable style={styles.selectedCityContainer}
+        onPress={() => props.setClickedButtom(true)}
+       >
          <Image
            style={styles.pinContainer}
            source={Constants.ICONS.PIN_URI}
@@ -39,7 +42,7 @@ export function LocationComponent(props){
            style={styles.chevronContainer}
            source={Constants.ICONS.CHEVRON_URI}
          />
-       </View>
+       </Pressable>
        <Image
          style={styles.bellContainer}
          source={Constants.ICONS.BELL_URI}

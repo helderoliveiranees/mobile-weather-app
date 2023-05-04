@@ -61,3 +61,7 @@ export const GIF_SPLASH_URI = require('../weather_figures/gifs/animation.gif')
 
 //Uri to the gif presented in the splash screen
 export const GIF_LOADING_URI = require('../weather_figures/gifs/animation.gif')
+
+
+//Server gateway (this is a local server)
+export const gateway = 'http://10.220.0.9:3000'

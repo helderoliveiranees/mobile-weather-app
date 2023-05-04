@@ -47,6 +47,19 @@
    //The results from API will be load into this state
    //const [results, setResults] = useState(Constants.DEFAULT_RESULTS)
    const [results, setResults] = useState(null)
+
+   const [clickedButtom, setClickedButtom] = useState(false)
+   const [isFirstRender, setIsFirstRender] = useState(true)
+
+  //Navigate to location screen when user clicks the buttom to
+  //define a new location
+  //  useEffect(()=>{
+  //    if(!isFirstRender){
+  //     navigation.navigate('LocationScreen')
+  //    }else{
+  //      setIsFirstRender(false)
+  //    }
+  //  },[clickedButtom])
  
    //Calls the https://api.hgbrasil.com/ to retrieve the weather information
    //This function is called on the first render, as well as when the the user 
@@ -87,7 +100,7 @@
               Constants.LIGHT_THEME:Constants.DARK_THEME}
               style={styles.linearGradient}
             >
-              <LocationComponent results={results}/>
+              <LocationComponent results={results} setClickedButtom={setClickedButtom}/>
               <TodayComponent results={results}/>
               <TimeTableComponent results={results}/>
               <ForecastComponent results={results}/>

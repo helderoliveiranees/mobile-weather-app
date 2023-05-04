@@ -1,7 +1,14 @@
 {
+    "cityText": "Cidade",
     "loadingText": "Carregando...",
     "nextForecastText": "Previsão",
     "maxText": "Max",
     "minText": "Min",
-    "todayText": "Hoje"
+    "textDone": "Pronto",
+    "todayText": "Hoje",
+    "selectCity": "Selecionar Cidade",
+    "selectCountryMessage": "Selecionar país",
+    "selectState": "Selecionar Estado",
+    "stateText": "Estado"
+
 }

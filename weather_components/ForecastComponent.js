@@ -20,8 +20,8 @@
  
  import * as Constants from '../weather_constants/Constants';
  import i18n from '../weather_translation/i18n';
- import {applyProportions, containerColor, getConditionWeatherImg, 
-   getDayOfWeek, formatMonthDay, getFakeTime} from '../weather_utils/utils';
+ import {containerColor, getConditionWeatherImg, 
+   getDayOfWeek} from '../weather_utils/utils';
  
  import {styles} from '../weather_styles/Styles'
  
