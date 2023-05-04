@@ -20,6 +20,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainScreen from './weather_screens/MainScreen'
 import SplashScreen from './weather_screens/SplashScreen'
+import LocationScreen from './weather_screens/LocationScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,10 @@ function App(){
               headerShown: false,
             })}/>
             <Stack.Screen name="MainScreen" component={MainScreen}
+              options={({ navigation, route }) => ({ 
+              headerShown: false,
+            })}/>
+            <Stack.Screen name="LocationScreen" component={LocationScreen}
               options={({ navigation, route }) => ({ 
               headerShown: false,
             })}/>
